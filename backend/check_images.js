@@ -1,0 +1,38 @@
+const https = require('https');
+
+const candidateIds = [
+  '1522708323590-d24dbb6b0267', '1502672260266-1c1de2d93688', '1554995207-c18c203602cb', '1598928506311-c95148c8ab1a',
+  '1522771739844-6a9f6d5f14af', '1497366216548-37526070297c', '1560448204-e02f11c3d0e2', '1513694203232-719a280e022f',
+  '1505691938895-1758d7feb511', '1484154218962-a197022b5858', '1512918728675-ed5a9ecdebfd', '1540518614846-15bd6f1088f9',
+  '1536376072261-38c7d01cf824', '1501183638710-841b581c56ce', '1493809842813-f6155e042211', '1494526585095-c15ce3dfcce3',
+  '1502005229762-cf1b2da7c5d6', '1524813686514-a57563d77e40', '1497366811353-68a4a727c2de', '1512914920023-98a15cb02f12',
+  '1449844908441-8829872d2607', '1505873242700-f289a29e1e0f', '1480074468113-da9c27771764', '1528913775512-827cb4a4313b',
+  '1505692433770-36f19f51681d', '1523699289804-55347c09047d', '1502672260266-1c1de2d93688', '1463620695885-8a1a3af0404e',
+  '1499916078039-3315a4b6da12', '1503174971373-b1f69850bded', '1495433324511-bf8e929ba47e', '1513694203232-719a280e022f',
+  '1521334884684-d80222895322', '1505691938895-1758d7feb511', '1484154218962-a197022b5858', '1493809842813-f6155e042211',
+  '1494526585095-c15ce3dfcce3', '1502005229762-cf1b2da7c5d6', '1524813686514-a57563d77e40', '1497366811353-68a4a727c2de'
+];
+
+async function checkUrl(id) {
+  return new Promise((resolve) => {
+    https.get(`https://images.unsplash.com/photo-${id}?w=800&q=80`, (res) => {
+      resolve({ id, status: res.statusCode });
+    }).on('error', () => resolve({ id, status: 500 }));
+  });
+}
+
+async function run() {
+  console.log('Checking images...');
+  const valid = [];
+  for (const id of candidateIds) {
+    const res = await checkUrl(id);
+    if (res.status === 200 || res.status === 302) {
+      if (!valid.includes(id)) {
+          valid.push(id);
+      }
+    }
+  }
+  console.log(JSON.stringify(valid));
+}
+
+run();

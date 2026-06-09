@@ -1,0 +1,115 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum Role {
+  SEEKER
+  OWNER
+  ADMIN
+}
+
+enum KosType {
+  PUTRA
+  PUTRI
+  CAMPUR
+}
+
+enum KosStatus {
+  ACTIVE
+  HIDDEN
+}
+
+model User {
+  id         String     @id @default(uuid())
+  email      String     @unique
+  password   String
+  name       String
+  role       Role       @default(SEEKER)
+  phone      String?
+  isVerified Boolean    @default(false) // Untuk verifikasi Owner
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+
+  kosList    Kos[]      // Relasi: Owner punya banyak Kos
+  savedKos   SavedKos[] // Relasi: Kos yang disimpan Seeker
+  reviews    Review[]   // Relasi: Review yang ditulis Seeker
+}
+
+model Kos {
+  id             String        @id @default(uuid())
+  name           String
+  description    String        @db.Text
+  address        String        @db.Text
+  city           String        @default("Semarang")
+  price          Int
+  type           KosType
+  availableRooms Int           @default(0)
+  status         KosStatus     @default(ACTIVE)
+  latitude       Float?        // Untuk Map API (OpenStreetMap)
+  longitude      Float?        // Untuk Map API (OpenStreetMap)
+  ownerId        String
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  owner          User          @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  images         KosImage[]
+  facilities     KosFacility[]
+  savedBy        SavedKos[]
+  reviews        Review[]
+}
+
+model Facility {
+  id        String        @id @default(uuid())
+  name      String        @unique
+  icon      String?       // Nama ikon (misal: 'wifi', 'ac')
+  
+  kosList   KosFacility[]
+}
+
+// Tabel Relasi Many-to-Many untuk Kos dan Fasilitas
+model KosFacility {
+  kosId      String
+  facilityId String
+
+  kos        Kos      @relation(fields: [kosId], references: [id], onDelete: Cascade)
+  facility   Facility @relation(fields: [facilityId], references: [id], onDelete: Cascade)
+
+  @@id([kosId, facilityId])
+}
+
+// Tabel Relasi Many-to-Many untuk Kos yang Disimpan User
+model SavedKos {
+  userId String
+  kosId  String
+
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  kos    Kos  @relation(fields: [kosId], references: [id], onDelete: Cascade)
+
+  @@id([userId, kosId])
+}
+
+model Review {
+  id        String   @id @default(uuid())
+  rating    Int      // Rating 1-5
+  comment   String?  @db.Text
+  userId    String
+  kosId     String
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  kos       Kos      @relation(fields: [kosId], references: [id], onDelete: Cascade)
+}
+
+model KosImage {
+  id      String @id @default(uuid())
+  url     String
+  kosId   String
+  
+  kos     Kos    @relation(fields: [kosId], references: [id], onDelete: Cascade)
+}
