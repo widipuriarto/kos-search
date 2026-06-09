@@ -1,16 +1,16 @@
 {
   "version": 2,
-  "buildCommand": "npm install && npx prisma generate && npx tsc",
+  "buildCommand": "npx prisma generate && npx tsc",
   "builds": [
     {
-      "src": "dist/index.js",
+      "src": "dist/src/index.js",
       "use": "@vercel/node"
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/(.*)",
-      "dest": "dist/index.js"
+      "source": "/(.*)",
+      "destination": "/dist/src/index.js"
     }
   ]
 }
