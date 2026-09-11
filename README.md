@@ -1,6 +1,4 @@
-<div align="center">
-  <h1><img src="./frontend/public/logo.png" alt="Kos Search Logo" width="40" style="vertical-align: middle; margin-right: 10px;"/> Kos Search - AI Powered Boarding House</h1>
-</div>
+<h1><img src="./frontend/public/logo.png" alt="Kos Search Logo" width="40" style="vertical-align: middle; margin-right: 10px;"/> Kos Search - AI Powered Boarding House</h1>
 
 <br/>
 
