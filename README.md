@@ -8,9 +8,6 @@
 
 <br/>
 
-
-<br/>
-
 ## About Project
 
 **Kos Search** is a modern full-stack boarding house directory platform that combines web technology with artificial intelligence. Relying on **Google Gemini 2.5 Flash**, this platform allows users to search for properties using everyday natural language, replacing rigid traditional UI filters. This platform is supported by a _Serverless_ architecture with a combination of React, Node.js, Prisma, and PostgreSQL.
