@@ -2,8 +2,8 @@
   <h1>Kos Search - AI Powered Boarding House Search Engine</h1>
   <p>
     <img src="./frontend/public/logo.png" alt="Kos Search Logo" width="45" style="vertical-align: middle; margin-right: 10px;"/>
-    <a href="https://kos-search.vercel.app/" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: #F8F0EB; color: #000; text-decoration: none; border-radius: 5px; font-weight: bold; border: 1px solid #ddd; vertical-align: middle;">
-      Kos Search
+    <a href="https://kos-search.vercel.app/" target="_blank">
+      <img src="https://img.shields.io/badge/Kos_Search-F8F0EB?style=for-the-badge&logoColor=black" alt="Kos Search" style="vertical-align: middle;"/>
     </a>
   </p>
 </div>
@@ -70,7 +70,7 @@ flowchart TD
 
     subgraph S2 [2. AI Feature Extraction]
         direction RL
-        A2(JSON Response<br>City, Price, Facilities):::aiLayer <-- A1(Google Gemini 2.5 Flash<br>NLP Model):::aiLayer <-- B2(Inject Prompt Schema<br>Structured Output):::backendLayer
+        B2(Inject Prompt Schema<br>Structured Output):::backendLayer --> A1(Google Gemini 2.5 Flash<br>NLP Model):::aiLayer --> A2(JSON Response<br>City, Price, Facilities):::aiLayer
     end
 
     subgraph S3 [3. Relational Data Processing]
@@ -80,7 +80,7 @@ flowchart TD
 
     subgraph S4 [4. Return Search Results]
         direction RL
-        U2(User Screen<br>Kost Card Catalog):::userLayer <-- F2(Frontend React<br>Render Component):::userLayer <-- B4(Backend API<br>Send Kost Object Array):::backendLayer
+        B4(Backend API<br>Send Kost Object Array):::backendLayer --> F2(Frontend React<br>Render Component):::userLayer --> U2(User Screen<br>Kost Card Catalog):::userLayer
     end
 
     S1 --> S2
