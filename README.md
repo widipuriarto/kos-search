@@ -8,6 +8,7 @@
 
 <br/>
 
+
 <br/>
 
 ## About Project
@@ -57,12 +58,6 @@ flowchart TD
     classDef aiLayer fill:#fef08a,stroke:#eab308,stroke-width:2px,color:#854d0e,font-family:sans-serif;
     classDef backendLayer fill:#dcfce7,stroke:#22c55e,stroke-width:2px,color:#14532d,font-family:sans-serif;
     classDef dbLayer fill:#f3e8ff,stroke:#a855f7,stroke-width:2px,color:#581c87,font-family:sans-serif;
-| Phase | Flow / Action | Technology Used | Description |
-| :--- | :--- | :--- | :--- |
-| **1. User Interaction** | `User Input` ➔ `Frontend` ➔ `Backend` | React, Express.js | The user types a natural language prompt. The React frontend captures this and forwards the payload to the Node.js backend. |
-| **2. AI Extraction** | `Backend` ➔ `Gemini AI` ➔ `JSON` | Gemini 2.5 Flash API | The backend injects a strict schema. The AI processes the prompt and extracts criteria (City, Price, Facilities) into structured JSON. |
-| **3. Data Processing** | `JSON` ➔ `Prisma ORM` ➔ `Database` | Prisma, PostgreSQL | The backend parses the JSON and Prisma ORM dynamically builds and executes the relational filters on the Supabase database. |
-| **4. Search Results** | `Database` ➔ `Backend` ➔ `Frontend` | React, Supabase | The database returns the matching records. The backend sends the Kost array back to the frontend, which renders the Kost Card catalog. |
 
     style S1 fill:#ffffff,stroke:#94a3b8,stroke-width:1px,stroke-dasharray: 5 5,color:#64748b,font-weight:bold
     style S2 fill:#ffffff,stroke:#94a3b8,stroke-width:1px,stroke-dasharray: 5 5,color:#64748b,font-weight:bold
