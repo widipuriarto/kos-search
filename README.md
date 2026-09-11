@@ -1,7 +1,10 @@
 <div align="center">
-  <h1><img src="./frontend/public/logo.png" alt="Kos Search Logo" width="40" style="vertical-align: middle; margin-right: 10px;"/> Kos Search - AI Powered Boarding House Search Engine</h1>
-  <p>Link Website: <a href="https://kos-search.vercel.app/" target="_blank">https://kos-search.vercel.app/</a></p>
+  <h1><img src="./frontend/public/logo.png" alt="Kos Search Logo" width="40" style="vertical-align: middle; margin-right: 10px;"/> Kos Search - AI Powered Boarding House</h1>
 </div>
+
+<br/>
+
+<p>Link Website: <a href="https://kos-search.vercel.app/" target="_blank">https://kos-search.vercel.app/</a></p>
 
 <br/>
 
